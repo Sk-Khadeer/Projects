@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  </head>
+  <body>
+    <h1>MOUSE EVENT</h1>
+    <div id="box" class="test">
+      <h2>Test box</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, eligendi
+        incidunt unde, eos laborum vitae repellat maxime sed ut dignissimos
+        fugit. Obcaecati quasi alias saepe dicta harum, laborum at iste?
+      </p>
+    </div>
+    <script>
+      $(document).ready(function () {
+        $("#box").click(function () {
+          $("#box").css("background-color", "green");
+        });
+
+        $("#box").dblclick(function () {
+          $("#box").css("background-color", "yellow");
+        });
+
+        $("#box").contextmenu(function () {
+          $("#box").css("background-color", "blue");
+        });
+        $("#box").mouseenter(function () {
+          $("#box").css("background-color", "tan");
+        });
+        $("#box").mouseleave(function () {
+          $("#box").css("background-color", "gray");
+        });
+      });
+    </script>
+  </body>
+</html>

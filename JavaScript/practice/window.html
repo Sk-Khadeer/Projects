@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="openWindow()">Open Window</button>
+    <button onclick="closeWindow()">Close Window</button>
+    <button onclick="resizeTo()">ResizeTo Window</button>
+    <button onclick="resizeBy()">ResizeBy Window</button>
+    <button onclick="moveWindow()">Move Window</button>
+    <script>
+      var myWindow;
+      function openWindow() {
+        myWindow = window.open(
+          " ",
+          " ",
+          "width=200px,height=200px,left=100px,rigth=100px"
+        ); //opens in another tab
+        myWindow.document.write("<p><h1>This is a new window</h1></p>");
+      }
+      function closeWindow() {
+        myWindow.close();
+      }
+      function resizeTo() {
+        myWindow.resizeTo(400, 400);
+      }
+      function resizeBy() {}
+      function moveWindow() {
+        myWindow.moveTo(200, 200);
+        myWindow.focus();
+      }
+    </script>
+  </body>
+</html>

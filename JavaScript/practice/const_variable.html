@@ -1,0 +1,117 @@
+<!-- // Always declare a variable with const when you know that the value should not be changed.
+
+// Use const when you declare:
+
+// A new Array
+// A new Object
+// A new Function
+// A new RegExp
+// Constant Objects and Arrays
+// The keyword const is a little misleading.
+
+// It does not define a constant value. It defines a constant reference to a value.
+
+// Because of this you can NOT:
+
+// Reassign a constant value
+// Reassign a constant array
+// Reassign a constant object
+// But you CAN:
+
+// Change the elements of constant array
+// Change the properties of constant object
+
+// Constant Arrays
+// You can change the elements of a constant array: -->
+
+<!DOCTYPE html>
+  <body>
+    <h2>JavaScript const</h2>
+    <p>Declaring a constant array does NOT make the elements unchangeable:</p>
+    <p id="demo"></p>
+
+    <script>
+      // Create an Array:
+      const cars = ["Saab", "Volvo", "BMW"];
+
+      // Change an element:
+      cars[0] = "Toyota";
+
+      // Add an element:
+      cars.push("Audi");
+
+      // Display the Array:
+      document.getElementById("demo").innerHTML = cars;
+    </script>
+
+    <!-- But you can NOT reassign the array: -->
+
+    <h2>JavaScript const</h2>
+    <p>You can NOT reassign a constant array:</p>
+    <p id="demo1"></p>
+
+    <script>
+      try {
+        const cars = ["Saab", "Volvo", "BMW"];
+        cars = ["Toyota", "Volvo", "Audi"];
+      } catch (err) {
+        document.getElementById("demo1").innerHTML = err;
+      }
+    </script>
+
+    <!-- Constant Objects
+You can change the properties of a constant object: -->
+      
+    <h2>JavaScript const</h2>
+    <p>
+      Declaring a constant object does NOT make the objects properties
+      unchangeable:
+    </p>
+    <p id="demo2"></p>
+
+    <script>
+      // Create an object:
+      const car = { type: "Fiat", model: "500", color: "white" };
+
+      // Change a property:
+      car.color = "red";
+
+      // Add a property:
+      car.owner = "Johnson";
+
+      // Display the property:
+      document.getElementById("demo2").innerHTML = "Car owner is " + car.owner;
+
+
+      var a={
+        name:"ak",
+        area:"madhapur"
+      }
+    
+      // console.log(a);
+      // console.log(`asbh\rabc`);
+      // let n="aabcdhbhadefgh";
+      // console.log(n);
+      // console.log(n.slice(2,4));
+      // console.log(n.substring(2,4));
+      // // console.log(n.split("b"))
+      // console.log(n);
+
+//       const text = "Mozilla";
+// console.log(text.substring(1,3)); //la
+// console.log(text.slice(1,3)); //la
+// console.log(text);
+
+let a1=["a","b","c"];
+// console.log(a);
+// delete a[0];
+// console.log(a.length);console.log(a);
+
+let num=[1,223,3,44,5,63,90];
+let compare=(a,b)=>{
+ return a-b; 
+};
+console.log(num.sort(compare));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr1=[10,20,30];
+        var arr2=[40,50];
+        //concat by using concat method
+        // var arr3=arr1.concat(arr2);
+        // by using spread operator we doing now
+        var arr3=[...arr1,...arr2];//we can add values before and after [20,...arr1,...arr2,90]
+        console.log(arr3);
+
+//object
+        var obj1={
+            name:"sridhar",age:25
+        };
+        
+        var obj2={
+            course:"java"
+        };
+        var obj3={...obj1,...obj2};
+        console.log(obj3);
+    </script>
+</body>
+</html>

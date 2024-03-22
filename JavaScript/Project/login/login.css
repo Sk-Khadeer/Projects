@@ -1,0 +1,96 @@
+.bgColor {
+  background-image: url("../images/abc.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;  /* this makes sure the image covers the entire element */
+  background-position: center center;  /* this will center the background image */
+  height: 100vh; 
+}
+.container {
+  margin: 5rem;
+  
+}
+
+ .row.g-0 {
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  border-radius: 30px 30px 30px 30px;
+  }
+
+/* Set a fixed height for medium and large screens, you can adjust this if needed */
+@media (min-width: 768px) {
+  .row.g-0 {
+    height: 500px; /* or the height you want */
+  }
+}
+
+/* Make the image cover its container */
+.images {
+  height: 100%;
+}
+
+.images img {
+  height: 100%;
+  object-fit: cover;
+  max-width: 100%;
+  border-radius: 30px 30px 30px 30px;
+}
+
+/* Make the login card cover its container */
+/* .bg-white {
+  height: 100%;
+} */
+
+
+.form-data {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.main-heading {
+  font-size: 30px;
+}
+
+.form-data label {
+  font-size: 18px;
+  margin-left: 2px;
+}
+
+.form-data input {
+  height: 50px;
+  border: 2px solid #eee;
+  transition: all 1s;
+  border-radius: 5px;
+}
+
+.form-data input:focus {
+  outline: none;
+  border: 2px solid #000;
+  box-shadow: none;
+}
+
+.login-btn .btn {
+  width: 100%;
+  height: 46px;
+  margin-top: 10px;
+}
+.field-icon {
+  position: absolute;
+  right: 20px;
+  top: 70%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 5px;
+  height: 15px; /* This ensures that space for the error message is always reserved, even if it's empty */
+  text-align: left;
+}
+
+
+.form-data {
+  position: relative;
+}

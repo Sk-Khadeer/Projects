@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body class="bgColor">
+  <div class="container ">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="row g-0">
+        <div class="col-12 col-md-6 col-xl-6">
+          <div class=" d-flex justify-content-center flex-column align-items-center">
+            <div class="images">
+              <img src="../images/employee.jpg" alt="" class="img-fluid">
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-6">
+          <div class="btn-light">
+            <div class="p-4 d-flex justify-content-center flex-column align-items-center">
+              <span class="main-heading">Login</span>
+
+              <div class="form-data">
+                <label>Email</label>
+                <span style="color: red">*</span></label>
+                <input type="email" name="email" class="form-control w-100" required />
+
+              </div>
+              <div class="error-message" id="errorMessage"></div>
+              <div class="form-data position-relative">
+                <!-- Add 'position-relative' here -->
+                <label>Password</label>
+                <span style="color: red">*</span></label>
+                <input id="password" type="password" name="password" class="form-control w-100" required />
+                <span toggle="#password" class="fa fa-eye field-icon toggle-password"></span>
+
+              </div>
+              <div class="error-message" id="passwordErrorMessage"></div>
+
+              <div class="d-flex justify-content-between w-100 align-items-center">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                  <label class="form-check-label"> Remember me </label>
+                </div>
+                <a class="text-decoration-none forgot-text" href="../forgotpassword/forgotPassword.html">Forgot
+                  password?</a>
+
+              </div>
+
+              <div class="login-btn w-100 mt-2">
+                <button type="button" class="btn btn-primary" onclick="submitForm()">
+                  Login
+                </button>
+                <div class="text-center">
+                  <p>Not a Employee? <a href="../signup/signup.html">Register</a></p>
+                </div>
+                <!-- Error message will be displayed here -->
+                <!-- <span class="text-danger" id="errorMessage"></span> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setupConfirmationChecks();
+      setupPasswordToggle();
+      setupFormSubmission();
+    });
+
+    function setupConfirmationChecks() {
+      let token = getUrlParameter("token");
+      let email = getUrlParameter("email");
+      emailConfirmation(token);
+      // if (token) {
+      //   emailConfirmation(token);
+      // } else if (email) {
+      //   // whatsappConfirmation(email);
+      // }
+    }
+
+    function emailConfirmation(token) {
+      $.ajax({
+        url: "http://localhost:8080/confirm",
+        method: "GET",
+        data: { token: token },
+        success: function (response) {
+          alert(response.status);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          alert("Error confirming email: " + jqXHR.responseJSON.status);
+        }
+      });
+    }
+
+    // function whatsappConfirmation(email) {
+    //   $.ajax({
+    //     url: "http://localhost:8080/confirmViaWhatsApp",
+    //     method: "GET",
+    //     data: { email: email },
+    //     success: function (response) {
+    //       alert(response);
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //       alert("Error confirming via WhatsApp: " + jqXHR.responseJSON.status);
+    //     }
+    //   });
+    // }
+
+    function setupPasswordToggle() {
+      $(".toggle-password").click(function () {
+        let input = $($(this).attr("toggle"));
+        if (input.attr("type") === "password") {
+          input.attr("type", "text");
+          $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+        } else {
+          input.attr("type", "password");
+          $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+        }
+      });
+    }
+
+    function setupFormSubmission() {
+      document.querySelector("#loginButton").addEventListener('click', submitForm);
+    }
+
+    function submitForm() {
+      const formData = {
+        email: document.querySelector("input[name='email']").value,
+        password: document.querySelector("input[name='password']").value,
+        rememberMe: document.querySelector("#flexCheckDefault").checked,
+      };
+      let haserror = false;
+      if (!formData.email) {
+        document.getElementById("errorMessage").textContent = "The field is required!";
+        haserror = true;
+      }
+      if (!formData.password) {
+        document.getElementById("passwordErrorMessage").textContent = "The field is required!";
+        haserror = true;
+      }
+
+      if (haserror) {
+        return;
+      }
+      fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // console.log(data.status);
+          switch (data.status) {
+            case "email_not_found":
+              alert("Email not found!");
+              break;
+            case "invalid_credentials":
+              alert("Invalid login credentials.");
+              break;
+            case "Logged in successfully.":
+              // console.log("Logged in successfully", data.token);
+              console.log(data);
+              localStorage.setItem('userToken', data.token);
+              localStorage.setItem('userEmail', data.email);
+              localStorage.setItem('userRole', data.role);
+              localStorage.setItem('userEmpCode', data.empcode);
+
+              if (localStorage.getItem('userRole') === "ADMIN") {
+                window.location.href = "../admin-dashboard/dashboard.html";
+
+              } else {
+                window.location.href = "../user-dashboard/dashboard.html";
+              }
+
+              // window.location.href = "../dashboard/dashboard.html";
+              break;
+
+            case "Please check your email to confirm your registration before logging in.":
+              alert(
+                "Please check your email to confirm your registration before logging in."
+              );
+              break;
+
+            default:
+              console.error("Unknown status received:", data.status);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert(
+            "There was an error processing your request. Please try again later."
+          );
+        });
+
+      if (localStorage.getItem('userToken')) {
+        console.log("Token is stored");
+      } else {
+        console.log("Token is not stored");
+      }
+    }
+
+
+    function getUrlParameter(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      let regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+      let results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+  </script>
+</body>
+
+</html>

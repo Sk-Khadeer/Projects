@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="form-group col-6">
+		<label for="inputEmail4">Start date</label> <input type="date"
+			value="fsd" id="startdateId" class="form-control" required>
+	</div>
+
+
+	<script>
+		var date = new Date();
+		console.log(date);
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10)
+			month = "0" + month;
+		if (day < 10)
+			day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+		console.log(date);
+		document.getElementById("startdateId").value = today;
+	</script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div.a {
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 90px;
+}
+div.b {
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+}
+body {background-color: black;}
+h1   {color: blue;}
+table   {color: black;}
+</style>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<form action="add.jsp" method="post">
+<div class="a" style='background-color:lightgreen;'>
+<h1 align="center">Bill Details</h1>
+<table align='center'>
+<tr><td>Title:</td><td><input type="text" name="title" required ></td></tr>
+<tr><td>Amount:</td><td><input type="number" name="amount" required min="10" max="100000" ></td></tr>
+<tr><td>Date:</td><td><input type="date" name="date" required></td></tr>
+<tr><td></td><td><input type="submit" value="submit">
+<input type="reset" value="reset"></td></tr>
+</table>
+</div>
+</form>
+<form action="filter.jsp?page=1" method="post">
+<div class="b" style='background-color:yellow;'>
+
+<table align="center">
+<tr><td>Filter By Year :</td>
+<td> <select name="f" onchange="this.form.submit()" style='background-color: white;align-items: center;'>
+<option>Select Year</option>
+<option>2020</option>
+<option>2021</option>
+<option>2022</option>
+</select></td>
+</tr>
+</table>
+</div>
+<!--  <a href="filter.jsp?page=1">View All Details</a>-->
+</form>
+
+
+<!--  <div class="c" style='background-color:yellow; '>
+<h3 align="center">
+<a href="pagination.jsp?page=1">View All Details</a> 
+</div>
+-->
+</body>
+</html>

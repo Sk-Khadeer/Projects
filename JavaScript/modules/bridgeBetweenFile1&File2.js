@@ -1,0 +1,1 @@
+export { bridge } from "./file1.js";

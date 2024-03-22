@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CRUD operation in table row using jQuery</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <h1 class="text-center text-primary">
+            CRUD operation in table row using jQuery
+          </h1>
+
+          <form style="border: 3px solid black">
+            <div class="mb-3">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="firstname"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="mb-3">
+              <label>Email Address</label>
+              <input type="email" name="email" class="form-control" required />
+            </div>
+            <button
+              type="submit"
+              class="btn btn-success save-btn"
+              style="margin-bottom: 20px"
+            >
+              Save
+            </button>
+            <!-- <button type="button" onclick="submitForm()">Submit</button> -->
+          </form>
+          <br />
+          <table class="table table-bordered data-table">
+            <thead>
+              <th>Full Name</th>
+              <th>Email Address</th>
+              <th width="250px">Action</th>
+            </thead>
+            <tbody>
+              <!-- here code append using jquery dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      //1. by using onsubmit function on button click
+      function submitForm() {
+        const formData = {
+          firstname: document.querySelector("input[name='firstname']").value,
+          email: document.querySelector("input[name='email']").value,
+        };
+
+        fetch("http://localhost:8080/saveData", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error:", error));
+      }
+
+      //   ================================================================================
+      //button on click
+      $("form").submit(function (e) {
+        e.preventDefault();
+
+        const formData = {
+          firstname: document.querySelector("input[name='firstname']").value,
+          email: document.querySelector("input[name='email']").value,
+        };
+        //using fetch
+        // fetch("http://localhost:8080/saveData", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(formData),
+        // })
+        //   .then((response) => response.json())
+        //   .then((data) => console.log(data))
+        //   .catch((error) => console.error("Error:", error));
+
+        //using ajax
+        $.ajax({
+          url: "http://localhost:8080/saveData",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(formData),
+          dataType: "json",
+          success: function (data) {
+            console.log(data);
+          },
+          error: function (error) {
+            console.error("Error:", error);
+          },
+        });
+
+        var name = $("input[name='firstname']").val();
+        var email = $("input[name='email']").val();
+
+        $(".data-table tbody").append(
+          "<tr nameHere='" +
+            name +
+            "' emailHere='" +
+            email +
+            "'><td>" +
+            name +
+            "</td><td>" +
+            email +
+            "</td><td><button class='btn btn-info btn-edit ms-2 mt-2'>Edit</button><button class='btn btn-danger btn-delete ms-2 mt-2'>Delete</button></td></tr>"
+        );
+
+        $("input[name='firstname']").val("");
+        $("input[name='email']").val("");
+      });
+
+      $("body").on("click", ".btn-delete", function () {
+        $(this).parents("tr").remove();
+      });
+
+      $("body").on("click", ".btn-edit", function () {
+        var name = $(this).parents("tr").attr("nameHere");
+        var email = $(this).parents("tr").attr("emailHere");
+
+        $(this)
+          .parents("tr")
+          .find("td:eq(0)")
+          .html(
+            '<input name="edit_name" class="form-control" value="' + name + '">'
+          );
+        $(this)
+          .parents("tr")
+          .find("td:eq(1)")
+          .html(
+            '<input name="edit_email" class="form-control" value="' +
+              email +
+              '">'
+          );
+
+        $(this)
+          .parents("tr")
+          .find("td:eq(2)")
+          .prepend(
+            "<button class='btn btn-info btn-update ms-2 mt-2'>Update</button><button class='btn btn-warning btn-cancel ms-2 mt-2'>Cancel</button>"
+          );
+        $(this).hide();
+      });
+
+      $("body").on("click", ".btn-cancel", function () {
+        var name = $(this).parents("tr").attr("nameHere");
+        var email = $(this).parents("tr").attr("emailHere");
+
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-update").remove();
+        $(this).parents("tr").find(".btn-cancel").remove();
+      });
+
+      $("body").on("click", ".btn-update", function () {
+        var name = $(this).parents("tr").find("input[name='edit_name']").val();
+        var email = $(this)
+          .parents("tr")
+          .find("input[name='edit_email']")
+          .val();
+
+        $(this).parents("tr").find("td:eq(0)").text(name);
+        $(this).parents("tr").find("td:eq(1)").text(email);
+
+        $(this).parents("tr").attr("nameHere", name);
+        $(this).parents("tr").attr("emailHere", email);
+
+        $(this).parents("tr").find(".btn-edit").show();
+        $(this).parents("tr").find(".btn-cancel").remove();
+        $(this).parents("tr").find(".btn-update").remove();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="signup.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+
+<body>
+  <section class="h-100 bg-dark">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card card-registration my-4">
+            <div class="row g-0">
+              <div class="col-xl-6 d-none d-xl-block">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img4.webp"
+                  alt="Sample photo" class="img-fluid" style="
+                      border-top-left-radius: 0.25rem;
+                      border-bottom-left-radius: 0.25rem;
+                    " />
+              </div>
+              <div class="col-xl-6">
+                <div class="card-body p-md-5 text-black">
+                  <h3 class="mb-5 text-uppercase" style="background-color: lightgray; align-items: center">
+                    Employee Registration form
+                  </h3>
+                  <form id="registrationForm">
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">First name
+                            <span style="color: red">*</span></label>
+                          <input type="text" id="firstname" class="form-control form-control-lg" name="firstname" />
+                          <div class="error-message"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <label class="form-label">Last name <span style="color: red">*</span></label>
+                        <div class="form-outline">
+                          <input type="text" id="lastname" class="form-control form-control-lg" name="lastname" />
+                          <div class="error-message"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Father's name
+                            <span style="color: red">*</span></label>
+
+                          <input type="text" id="fathername" class="form-control form-control-lg" name="fathername" />
+                          <div class="error-message"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Contact No
+                            <span style="color: red">*</span></label>
+                          <input type="number" id="phoneno" class="form-control form-control-lg" name="phoneno" />
+                          <div class="error-message"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Password <span style="color: red">*</span></label>
+                          <div class="password-wrapper">
+                            <input type="password" id="password" class="form-control form-control-lg" name="password" />
+                            <div class="input-group-append">
+                              <span class="toggle-password fa fa-eye" toggle="#password"></span>
+                            </div>
+                          </div>
+                          <div class="error-message" id="passwordError" style="color: red;"></div>
+                        </div>
+                      </div>
+                      <div class="col-md-6 mb-4">
+                        <div class="form-outline">
+                          <label class="form-label">Confirm Password <span style="color: red">*</span></label>
+                          <div class="password-wrapper">
+                            <input type="password" id="confirmPassword" class="form-control form-control-lg"
+                              name="password" />
+                            <div class="input-group-append">
+                              <span class="toggle-password fa fa-eye" toggle="#confirmPassword"></span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="error-message" id="confirmPasswordError" style="color: red;"></div>
+                      </div>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label">Email ID <span style="color: red">*</span></label>
+                      <input type="email" id="email" class="form-control form-control-lg" name="email" />
+                      <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="designation">Designation <span style="color: red">*</span></label>
+
+                      <select id="designation" class="form-control form-control-lg" name="designation">
+                        <option value="">Select a Designation</option>
+
+                        <option value="IT Director">IT Director</option>
+                        <option value="IT Manager">IT Manager</option>
+                        <option value="Project Manager">
+                          Project Manager
+                        </option>
+                        <option value="Software Developer">
+                          Software Developer
+                        </option>
+                        <option value="Web Developer">Web Developer</option>
+                        <option value="Mobile App Developer">
+                          Mobile App Developer
+                        </option>
+                        <option value="Systems Analyst">
+                          Systems Analyst
+                        </option>
+                        <option value="Network Engineer">
+                          Network Engineer
+                        </option>
+                        <option value="Systems Administrator">
+                          Systems Administrator
+                        </option>
+                        <option value="Cloud Solutions Architect">
+                          Cloud Solutions Architect
+                        </option>
+                        <option value="Database Administrator">
+                          Database Administrator
+                        </option>
+                        <option value="Data Scientist">Data Scientist</option>
+                        <option value="Machine Learning Engineer">
+                          Machine Learning Engineer
+                        </option>
+                        <option value="Quality Assurance Analyst">
+                          Quality Assurance Analyst
+                        </option>
+                        <option value="Technical Support Specialist">
+                          Technical Support Specialist
+                        </option>
+                        <option value="Technical Writer">
+                          Technical Writer
+                        </option>
+                        <option value="Help Desk Technician">
+                          Help Desk Technician
+                        </option>
+                        <option value="Security Analyst">
+                          Security Analyst
+                        </option>
+                        <option value="Cybersecurity Expert">
+                          Cybersecurity Expert
+                        </option>
+                        <option value="DevOps Engineer">
+                          DevOps Engineer
+                        </option>
+                        <option value="Scrum Master">Scrum Master</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="Business Intelligence Analyst">
+                          Business Intelligence Analyst
+                        </option>
+                        <option value="Business Analyst">
+                          Business Analyst
+                        </option>
+                        <option value="UX/UI Designer">UX/UI Designer</option>
+                        <option value="Product Manager">
+                          Product Manager
+                        </option>
+                        <option value="IT Consultant">IT Consultant</option>
+                        <option value="IT Auditor">IT Auditor</option>
+                      </select>
+
+                      <label class="form-label" id="subDesignationLabel" for="subDesignation">
+                        Sub Designation <span style="color: red">*</span>
+                      </label>
+                      <select id="subDesignation" class="form-control form-control-lg" name="subDesignation">
+                        <option value="">Select an Option</option>
+                      </select>
+
+                      <div class="error-message"></div>
+                    </div>
+
+                    <div class="form-outline mb-4">
+                      <label class="form-label">DOB <span style="color: red">*</span></label>
+                      <input type="date" id="dob" class="form-control form-control-lg" name="dob" required />
+
+                      <div class="error-message"></div>
+                    </div>
+
+                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      <h6 class="mb-0 me-4">Gender:</h6>
+
+                      <div class="form-check form-check-inline mb-0 me-4" style="margin-left: 20px">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="femaleGender"
+                          value="female" />
+
+                        <label class="form-check-label" for="femaleGender">Female</label>
+                        <div class="error-message"></div>
+                      </div>
+
+                      <div class="form-check form-check-inline mb-0 me-4">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="maleGender"
+                          value="male" />
+                        <div class="error-message"></div>
+                        <label class="form-check-label" for="maleGender">Male</label>
+                      </div>
+
+                      <div class="form-check form-check-inline mb-0">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="otherGender"
+                          value="other" />
+                        <div class="error-message"></div>
+                        <label class="form-check-label" for="otherGender">Other</label>
+                      </div>
+                      <div class="error-message"></div>
+                    </div>
+
+                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      <h6 class="mb-0 me-4">Role: </h6>
+                      <div class="form-check form-check-inline mb-0 me-4 ml-3">
+                        <input class="form-check-input" type="radio" name="role" id="User" value="USER" />
+
+                        <label class="form-check-label" for="User">User</label>
+                        <div class="error-message"></div>
+                      </div>
+                      <div class="form-check form-check-inline mb-0 me-4 ml-3">
+                        <input class="form-check-input" type="radio" name="role" id="Admin" value="ADMIN" disabled />
+                        <label class="form-check-label" for="Admin">Admin</label>
+                        <div class="error-message"></div>
+                      </div>
+
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6 mb-4">
+                        <label class="form-label">Pincode <span style="color: red">*</span></label>
+                        <input type="number" id="pincode" class="form-control form-control-lg" name="pincode" />
+                        <div class="error-message"></div>
+                      </div>
+                    </div>
+
+                    <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
+                      <h6 class="mb-0 me-4">Send Login Link Via:</h6>
+
+                      <div class="form-check form-check-inline mb-0 me-4 ml-3">
+                        <input class="form-check-input" type="radio" name="loginLinkOption" id="WhatsAppOption"
+                          value="whatsapp" />
+                        <label class="form-check-label" for="WhatsAppOption">
+                          <i class="fa fa-whatsapp"></i> WhatsApp
+                        </label>
+                      </div>
+                      <div class="form-check form-check-inline mb-0 me-4 ml-3">
+                        <input class="form-check-input" type="radio" name="loginLinkOption" id="EmailOption"
+                          value="email" />
+                        <label class="form-check-label" for="EmailOption">
+                          <i class="fa fa-envelope"></i> Email
+                        </label>
+                      </div>
+                    </div>
+
+
+                    <div class="d-flex justify-content-end pt-3">
+                      <button type="reset" class="btn btn-light btn-lg">
+                        Reset all
+                      </button>
+                      <button type="submit" class="btn btn-warning btn-lg ms-2">
+                        Submit form
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="signup.js"></script>
+</body>
+
+</html>

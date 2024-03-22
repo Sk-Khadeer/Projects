@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>welcome</title>
+</head>
+<body>
+	<form action="#" th:action="@{/otpNotValid}" method="get">
+		<h2 th:text="${message}"></h2>
+		
+		
+		<div class="form-outline pt-1 mb-2 pb-1">
+			<button
+				class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+				type="submit">
+				
+				<a href="otpNotValid">Re-enter Otp</a></button>
+		</div>
+		
+		
+	</form>
+
+</body>
+</html>

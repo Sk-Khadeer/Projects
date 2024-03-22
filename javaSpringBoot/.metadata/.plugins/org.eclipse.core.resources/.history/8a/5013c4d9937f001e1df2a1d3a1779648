@@ -1,0 +1,205 @@
+package com.testing;
+
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
+
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class TestingApplication {
+
+	public static void main(String[] args) throws IOException {String tableName = "userinfo";
+    String packageName = "com.example.generated"; // Modify this to match your package structure
+
+    // Retrieve column information from the database
+    String classContent = generateClassContent(packageName, classNameFromTableName(tableName), getColumnsInfo(tableName));
+
+    // Save the content to a .java file in the same package as the main method
+    String fileName = packageName.replace('.', File.separatorChar) + File.separator + classNameFromTableName(tableName) + ".java";
+    Files.createDirectories(Path.of(packageName.replace('.', File.separatorChar)));
+    Files.write(Path.of(fileName), Arrays.asList(classContent), StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+
+    // Compile the generated class
+    JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+    StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+    Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjects(fileName);
+    compiler.getTask(null, fileManager, null, null, null, compilationUnits).call();
+    fileManager.close();
+
+    System.out.println("Generated class compiled successfully.");
+}
+
+private static String classNameFromTableName(String tableName) {
+    // Convert table name to CamelCase
+    StringBuilder result = new StringBuilder();
+    boolean capitalizeNext = true;
+    for (char ch : tableName.toCharArray()) {
+        if (ch == '_') {
+            capitalizeNext = true;
+        } else if (capitalizeNext) {
+            result.append(Character.toUpperCase(ch));
+            capitalizeNext = false;
+        } else {
+            result.append(ch);
+        }
+    }
+    return result.toString();
+}
+
+private static String generateClassContent(String packageName, String className, ResultSet columnsInfo) throws SQLException {
+    StringBuilder classContent = new StringBuilder();
+    classContent.append("package ").append(packageName).append(";\n\n");
+    classContent.append("public class ").append(className).append(" {\n");
+
+    while (columnsInfo.next()) {
+        String columnName = columnsInfo.getString("COLUMN_NAME");
+        String columnType = columnsInfo.getString("TYPE_NAME");
+
+        // Add fields to the class
+        classContent.append("    private ").append(mapSqlTypeToJavaType(columnType)).append(" ").append(columnName).append(";\n");
+    }
+
+    // Add constructor
+    classContent.append("\n");
+    classContent.append("    public ").append(className).append("(");
+
+    columnsInfo.beforeFirst(); // Reset the ResultSet cursor
+    while (columnsInfo.next()) {
+        String columnName = columnsInfo.getString("COLUMN_NAME");
+        String columnType = columnsInfo.getString("TYPE_NAME");
+
+        // Add parameters to the constructor
+        classContent.append(mapSqlTypeToJavaType(columnType)).append(" ").append(columnName).append(", ");
+    }
+    classContent.delete(classContent.length() - 2, classContent.length()); // Remove the trailing comma and space
+    classContent.append(") {\n");
+
+    columnsInfo.beforeFirst(); // Reset the ResultSet cursor
+    while (columnsInfo.next()) {
+        String columnName = columnsInfo.getString("COLUMN_NAME");
+
+        // Initialize fields in the constructor
+        classContent.append("        this.").append(columnName).append(" = ").append(columnName).append(";\n");
+    }
+
+    classContent.append("    }\n");
+
+    // Add getters and setters
+    columnsInfo.beforeFirst(); // Reset the ResultSet cursor
+    while (columnsInfo.next()) {
+        String columnName = columnsInfo.getString("COLUMN_NAME");
+        String columnType = columnsInfo.getString("TYPE_NAME");
+
+        classContent.append("\n");
+        classContent.append("    public ").append(mapSqlTypeToJavaType(columnType)).append(" get").append(capitalize(columnName)).append("() {\n");
+        classContent.append("        return ").append(columnName).append(";\n");
+        classContent.append("    }\n");
+
+        classContent.append("\n");
+        classContent.append("    public void set").append(capitalize(columnName)).append("(").append(mapSqlTypeToJavaType(columnType)).append(" ").append(columnName).append(") {\n");
+        classContent.append("        this.").append(columnName).append(" = ").append(columnName).append(";\n");
+        classContent.append("    }\n");
+    }
+
+    classContent.append("}\n");
+
+    return classContent.toString();
+}
+
+private static String mapSqlTypeToJavaType(String sqlType) {
+    // Add more mappings as needed
+    switch (sqlType.toUpperCase()) {
+        case "VARCHAR":
+            return "String";
+        case "INT":
+            return "int";
+        default:
+            return "Object";
+    }
+}
+
+private static String capitalize(String str) {
+    return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+}
+
+private static ResultSet getColumnsInfo(String tableName) throws SQLException {
+    Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jwt", "root", "ak@96");
+    DatabaseMetaData metaData = connection.getMetaData();
+    return metaData.getColumns(null, null, tableName, null);
+}
+}
+		
+//		 String className = "GeneratedEntity";
+//	        String classContent = generateClassContent(className);
+//
+//	        // Save the content to a .java file
+//	        String fileName = className + ".java";
+//	        Files.write(Path.of(fileName), Arrays.asList(classContent), StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+//
+//	        // Compile the generated class
+//	        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+//	        StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null);
+//	        Iterable<? extends JavaFileObject> compilationUnits = fileManager.getJavaFileObjects(fileName);
+//	        compiler.getTask(null, fileManager, null, null, null, compilationUnits).call();
+//	        fileManager.close();
+//
+//	        System.out.println("Generated class compiled successfully.");
+//	    }
+//
+//	    private static String generateClassContent(String className) {
+//	        return """
+//	            public class %s {
+//	                private String exampleField;
+//
+//	                public %s(String exampleField) {
+//	                    this.exampleField = exampleField;
+//	                }
+//
+//	                public void printExample() {
+//	                    System.out.println(exampleField);
+//	                }
+//	            }
+//	            """.formatted(className, className);
+//	    }
+//	
+//	}
+//		SpringApplication.run(TestingApplication.class, args);
+//	}
+//	@Bean
+//    public CommandLineRunner commandLineRunner(DataSource dataSource) {
+//        return args -> {
+//            // Accessing the DataSource
+//            System.out.println("Datasource URL: " + dataSource.getConnection().getMetaData().getURL());
+//
+//            // Generating entity class based on the "userinfo" table
+//            generateEntityClass(dataSource, "userinfo");
+//        };
+//    }
+//
+//    private void generateEntityClass(DataSource dataSource, String tableName) throws SQLException {
+//        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+//        DatabaseMetaData metaData = jdbcTemplate.getDataSource().getConnection().getMetaData();
+//        ResultSet resultSet = metaData.getColumns(null, null, tableName, null);
+//
+//        // Assuming you are printing the information, but you can generate the entity class here
+//        System.out.println("Generating entity class for table: " + tableName);
+//
+//        // Iterate over the result set and print column information
+//        while (resultSet.next()) {
+//            String columnName = resultSet.getString("COLUMN_NAME");
+//            String columnType = resultSet.getString("TYPE_NAME");
+//
+//            System.out.println("Column Name: " + columnName + ", Column Type: " + columnType);
+//        }
+//    }
+
+

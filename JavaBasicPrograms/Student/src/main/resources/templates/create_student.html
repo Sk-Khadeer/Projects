@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Students Management System</title>
+<link rel="stylesheet"
+ href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" 
+ integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+ crossorigin="anonymous">
+</head>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+  <!-- Brand -->
+  <a class="navbar-brand" href="#">Student Management System</a>
+
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/students}">Student Management</a>
+      </li>
+     
+    </ul>
+  </div>
+</nav><br>
+
+<div class="container">
+<div class="row">
+<div class="col-lg-6 col-md col-sm-6 container justify-content-center card">
+<h1 class="text-center">Create New Student</h1>
+<div class="card-body">
+<form th:action="@{/students}" th:object="${student}" method="POST">
+<table align="center">
+<div class="form-group">
+<tr>
+<td><label>Student first name</label></td>
+<td><input type="text" name="firstName" th:field="*{firstName}" class="form=control" placeholder="Enter Student First Name" required="required" maxlength="15" minlength="3"  ></td>
+</div>
+</tr>
+<tr>
+<div class="form-group">
+<td><label>Student Last Name</label></td>
+<td><input type="text" name="lastName" th:field="*{lastName}" class="form=control" placeholder="Enter Student last Name" required="required" maxlength="15" minlength="3"  ></td>
+</div>
+</tr>
+
+<tr>
+
+<div class="form-group">
+<td><label>Student Email</label></td>
+<td><input type="email" name="email" th:field="*{email}" class="form=control" placeholder="Enter Student email" required="required"></td>
+</div>
+</tr>
+
+<tr>
+
+<div class="form-group">
+<td><label>Student Phone</label></td>
+<td><input type="text"  th:field="*{phone}" class="form=control" placeholder="Enter Student phone" required="required" minlength="10" maxlength="13"   ></td>
+</div>
+</tr>
+<tr>
+
+<div class="form-group">
+<td><label>Student Address</label></td>
+<td><textarea type="textarea" th:field="*{address}" class="form=control" placeholder="Enter Student address" required="required" rows="3" cols="23"></textarea> </td>
+</div>
+</tr>
+<div class="box-body">
+<tr>
+<td align="right">
+ <button type="submit" class="btn btn-primary">Submit</button> </td><td><button type="reset" class="btn btn-dark">Reset</button></td></tr></div>
+ </table>
+</form>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

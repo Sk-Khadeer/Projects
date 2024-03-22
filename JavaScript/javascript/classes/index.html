@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        class a {
+            name = '';
+            constructor() {
+                this.name = 'abc';
+                this.age = 25;
+            }
+
+            a() {
+                console.log("abcd");
+            }
+
+            non_static() {
+                console.log("non-static");
+            }
+
+            static static() {
+                console.log("static");
+            }
+        }
+
+        function ab() {
+            console.log("function");
+        }
+
+        variable = 10;
+        let instance = new a();
+        instance.non_static();
+        a.static();
+        ab();
+
+        console.log(variable);
+        var variable;
+
+        console.log(instance);
+
+    </script>
+
+</body>
+
+</html>

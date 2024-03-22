@@ -1,0 +1,42 @@
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+  font-size: 1rem;
+  line-height: 2.15;
+  padding-left: 0.75em;
+  padding-right: 0.75em;
+}
+.card-registration .select-arrow {
+  top: 13px;
+}
+.error-message {
+  color: red;
+  font-size: 12px; /* Adjust as needed */
+}
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+ 
+}
+.fa-whatsapp, .fa-envelope {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.field-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+#subDesignationLabel,
+#subDesignation {
+  display: none;
+}
+.admin-email-field {
+  display: none;
+}

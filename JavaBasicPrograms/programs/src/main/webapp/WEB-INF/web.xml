@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" id="WebApp_ID" version="5.0">
+<welcome-file-list>
+ <welcome-file>new.html</welcome-file>
+ </welcome-file-list>
+  <servlet>
+ <servlet-name>hello</servlet-name>
+ <servlet-class>com.programs.Add</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>hello</servlet-name>
+ <url-pattern>/add</url-pattern>
+ </servlet-mapping>
+ <servlet>
+ <servlet-name>hell</servlet-name>
+ <servlet-class>com.programs.SquareServlet</servlet-class>
+ </servlet>
+ <servlet-mapping>
+ <servlet-name>hell</servlet-name>
+ <url-pattern>/sq</url-pattern>
+ </servlet-mapping>
+ 
+ 
+ 
+</web-app>

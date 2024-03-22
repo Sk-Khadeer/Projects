@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<school>
+    <student>
+        <name>sridhar</name>
+        <age>25</age>
+    </student>
+    <student>
+        <name>ashok</name>
+        <age>24</age>
+    </student>
+</school>

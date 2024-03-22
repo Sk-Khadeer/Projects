@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apply Leave</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compressorjs@latest/dist/compressor.min.js"></script>
+    <link rel="stylesheet" href="applyLeave.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="bg-dark">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <div class="container-fluid">
+                        <!-- Toggle Sidebar Button -->
+                        <button class="menu-btn" id="menuToggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <!-- Title next to the button -->
+                        <a class="navbar-brand ml-3" href="#">Apply Leave</a>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <div class="navbar-nav ms-auto mb-2 mb-lg-0">
+                                <button id="profileIcon" class="btn btn-link" style="margin-left: 50px;">
+                                    <b class="profile-text">Profile</b> <i class="fas fa-user iconStyle"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Sidebar -->
+    <nav id="sidebar" class="container-fluid">
+        <div class="position-sticky">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../user-dashboard/dashboard.html">
+                        <h6><b>Dashboard</b></h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../editUser/edit.html">
+                        <h6><b>Edit Profile</b></h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="applyleave.html">
+                        <h6><b>Apply leave</b></h6>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../changePassword/changePassword.html">
+                        <h6><b>Change Password</b></h6>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div id="main-content">
+            <div class="row">
+                <main class="col-md-12 ml-sm-auto col-lg-12 px-md-4">
+                    <div class="container">
+                        <div id="leave-details" class="col mt-4"></div>
+                        <div id="leave-form" style="display:none;">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label>Type of Leave:</label>
+                                    <select class="form-control" id="leaveType" required>
+                                        <option value="">Select an option</option>
+                                        <option value="sick">Sick Leave</option>
+                                        <option value="casual">Casual Leave</option>
+                                    </select>
+
+                                    <input type="text" class="form-control" id="sickInput" value="Sick Leave" readonly
+                                        hidden>
+                                    <input type="text" class="form-control" id="casualInput" value="Casual Leave"
+                                        readonly hidden>
+                                    <small class="text-danger" id="leaveTypeError"></small>
+
+                                </div>
+                                <!-- Start Date Field -->
+                                <div class="col-md-6 mb-4">
+                                    <label>Start Date:</label>
+                                    <input type="date" class="form-control" id="startDate" required>
+                                    <small class="text-danger" id="startDateError"></small>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <!-- End Date Field -->
+                                <div class="col-md-6 mb-4">
+                                    <label>End Date:</label>
+                                    <input type="date" class="form-control" id="endDate" required>
+                                    <small class="text-danger" id="endDateError"></small>
+                                </div>
+                                <div class="col-md-6 mb-4">
+                                    <label>Number of Days:</label>
+                                    <input type="number" class="form-control" id="leaveDays" min="1" required />
+                                    <small class="text-danger" id="leaveDaysError"></small>
+                                </div>
+                            </div>
+                            <div class="col-md-12 mb-4">
+                                <label>Reason:</label>
+                                <textarea class="form-control" id="leaveReason" rows="3" required></textarea>
+                                <small class="text-danger" id="leaveReasonError"></small>
+                            </div>
+                            <div class="col-md-12 py-2 text-center">
+                                <button class="btn btn-success btn-submit-leave">Submit</button>
+                                <button class="btn btn-danger btn-cancel-leave">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ... -->
+
+                    <div id="leave-actions" class="col mt-4" style="display: none;">
+                        <h5>Leave Actions</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Type</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Days</th>
+                                    <th>Reason</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leave-records">
+                                <!-- Dynamically populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ... -->
+
+                </main>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Sidebar -->
+    <nav id="right-sidebar">
+        <!-- Profile Sidebar Content -->
+        <div class="p-3">
+            <h5><u>User profile</u></h5>
+
+            <div id="profileImageContainer">
+                <div id="defaultProfileIconContainer"
+                    style="display: inline-block; width: 100px; height: 100px; border-radius: 50%; border: 2px solid #333; text-align: center; line-height: 100px;">
+                    <i id="defaultProfileIcon" class="fa fa-user fa-3x" aria-hidden="true"></i>
+                </div>
+
+                <img id="profileImage" src="" alt="Profile Picture" width="100" class="rounded-circle mb-3">
+                <a href="#" id="addProfileImageLink" style="display:none;">Add Image</a>
+            </div>
+            <p><strong>Name:</strong> <span id="profileName"></span></p>
+            <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+            <p><strong>Phone:</strong> <span id="profilePhone"></span></p>
+            <!-- Add logout button here -->
+            <button id="profileLogoutButton" class="btn btn-danger mt-2">Logout</button>
+        </div>
+    </nav>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="applyLeave.js">
+
+    </script>
+</body>
+
+</html>

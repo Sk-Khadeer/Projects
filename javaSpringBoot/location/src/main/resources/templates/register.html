@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Index</title>
+<link rel="stylesheet" th:href="@{/register.css}">
+</head>
+<body>
+	<form action="#" th:action="@{/register}" method="post"
+		th:object="${user}">
+		<div align="center">
+			<label for="firstname">First name :</label> <input type="text"
+				name="fname" th:field="*{fname}" /> <br /> <label for="lastname">Last
+				name :</label> <input type="text" name="lname" th:field="*{lname}" /> <br />
+
+			<label for="email">Email :</label> <input type="email" name="email"
+				th:field="*{email}" /> <br /> 
+			<label for="password">Password :</label> <input type="password"
+				name="password" th:field="*{password}" /> <br /> <label for="age">Age
+				:</label> <input type="number" name="age" th:field="*{age}" /> <br /> <label
+				for="gender">Gender :</label> <input type="radio"
+				th:field="*{gender}" value="Male" />Male <input type="radio"
+				th:field="*{gender}" value="Female" />Female<br /> <label
+				for=mobileNo>Mobile no :</label> <input type="number"
+				name="mobileNo" th:field="*{mobileNo}" /> <br /> <br />
+			<button type="submit">Register</button>
+		</div>
+	</form>
+</body>
+</html>

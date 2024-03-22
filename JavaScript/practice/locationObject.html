@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Javascript : Location object</h1>
+    <button onclick="newFunction()">Click </button><button onclick="reload()">Reload </button>
+    <button onclick="assignLink()">Assign Link </button>
+    <button onclick="replace()">Replace </button>
+    <button onclick="backHistory()">Back</button>
+    <button onclick="forwardHistory()">Forward  </button>
+    
+    <script>
+        var myWindow;
+       //LOCATION OBJECT
+
+        function newFunction(){
+            location.href="https://www.google.com/";
+        }
+        function reload(){
+            location.reload();//page refresh
+        }
+        function assignLink(){
+            location.assign("https://www.google.com/");//assigning url page stored in history
+        }
+        function replace(){
+            location.replace("https://www.google.com/");//assigning url page not exists in history
+        }
+
+
+
+
+        //HISTORY OBJECT
+        function backHistory(){
+           history.back();
+        }
+        function forwardHistory(){
+           history.forward();
+        }
+    </script>
+    
+</body>
+</html>

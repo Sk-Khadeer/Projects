@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Welcome to AK. A blog for coding enthusiasts" />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <title>AK - Heaven for Programmers</title>
+    <style>
+        .field-icon {
+            float: right;
+            margin-left: -25px;
+            margin-top: -25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .remaining-days {
+            position: absolute;
+            bottom: 10px;
+            right: 200px;
+            background-color: red(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .enrolled-course {
+            background-color: #17a2b8;
+            /* Bootstrap info color */
+            color: #c1c1c1;
+            /* Gray color to make text appear disabled */
+            position: relative;
+            /* Required for absolutely positioning the child "Already Bought" div */
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-color: rgba(255, 255, 255, 0.5);
+            /* semi-transparent white */
+            /* z-index: 10; */
+            /* ensure it's above other elements */
+        }
+
+        .enrolled-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: red;
+            /* Set "Already Bought" to red color */
+            background-color: rgba(255, 255, 255, 0.7);
+            /* Semi-transparent background for visibility */
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#"><b>AK</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="dashboard.html">DashBoard <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <input id="searchBox" class="form-control mr-sm-2 no-gutters" type="search" placeholder="Search"
+                    aria-label="Search" />
+            </form>
+
+            <!-- Insert the More Courses button here -->
+            <button class="btn btn-primary showMoreCourses no-gutters">More Courses</button>
+            <div>
+                <button id="logoutButton" class="btn btn-danger no-gutters">Logout</button>
+            </div>
+        </div>
+    </nav>
+    <div class="container my-4" id="enrolledCourseContainer">
+        <!-- New Div for message -->
+        <div id="messageContainer"></div>
+        <!-- <div class="row ">
+            <div class="course JAVA" data-duration1="3 months" data-amount1="4000" data-duration2="6 months"
+                data-amount2="5000" data-name="JAVA" data-type="document">
+
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Java</strong>
+                        <h3 class="mb-0">Learn Java</h3>
+                        <div class="mb-1 text-muted">Nov 12</div>
+                        <p class="card-text mb-auto">
+                            Dive deep into the world of Java and explore the intricacies of object-oriented
+                            programming.
+                            With Java
+                            being at the forefront of most applications, it's a must-learn language for aspiring
+                            developers.
+                        </p>
+
+                        <a href="#" class="stretched-link continueReading">Continue
+                            reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="bd-placeholder-img" width="200" height="250" src="images/java.webp" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="course JAVASCRIPT" data-duration1="3 months" data-amount1="6000" data-duration2="6 months"
+                data-amount2="11000" data-name="JAVASCRIPT" data-type="video">
+
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-warning">JavaScript</strong>
+                        <h3 class="mb-0">Learn JavaScript</h3>
+                        <div class="mb-1 text-muted">Nov 14</div>
+                        <p class="card-text mb-auto">
+                            Dive deep into JavaScript and discover its vast ecosystem and capabilities.
+                            From client-side scripting in browsers to server-side programming, JavaScript
+                            offers versatile solutions for web development.
+                        </p>
+
+                        <a href="#" class="stretched-link continueReading">Continue
+                            reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="bd-placeholder-img" width="200" height="250" src="images/js.jpg"
+                            alt="JavaScript Image" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="course JAVA" data-duration1="3 months" data-amount1="4000" data-duration2="6 months"
+                data-amount2="5000" data-name="JAVA" data-type="video">
+
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-primary">Java</strong>
+                        <h3 class="mb-0">Learn Java</h3>
+                        <div class="mb-1 text-muted">Nov 12</div>
+                        <p class="card-text mb-auto">
+                            Dive deep into the world of Java and explore the intricacies of object-oriented
+                            programming.
+                            With Java
+                            being at the forefront of most applications, it's a must-learn language for aspiring
+                            developers.
+                        </p>
+
+                        <a href="#" class="stretched-link continueReading">Continue
+                            reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="bd-placeholder-img" width="200" height="250" src="images/java.webp" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="course JAVASCRIPT" data-duration1="3 months" data-amount1="6000" data-duration2="6 months"
+                data-amount2="11000" data-name="JAVASCRIPT" data-type="document">
+
+                <div
+                    class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative ">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <strong class="d-inline-block mb-2 text-warning">JavaScript</strong>
+                        <h3 class="mb-0">Learn JavaScript</h3>
+                        <div class="mb-1 text-muted">Nov 14</div>
+                        <p class="card-text mb-auto">
+                            Dive deep into JavaScript and discover its vast ecosystem and capabilities.
+                            From client-side scripting in browsers to server-side programming, JavaScript
+                            offers versatile solutions for web development.
+                        </p>
+
+                        <a href="#" class="stretched-link continueReading">Continue
+                            reading</a>
+                    </div>
+                    <div class="col-auto d-none d-lg-block">
+                        <img class="bd-placeholder-img" width="200" height="250" src="images/js.jpg"
+                            alt="JavaScript Image" />
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="container my-4">
+        <button class="btn btn-primary mb-4 showMoreCourses">More Courses</button>
+    </div>
+    <div id="notFoundMessage" class="alert alert-warning" style="display:none;">
+        No courses found ..
+    </div>
+
+    <!-- Buy Course Modal -->
+    <div class="modal fade" id="buyCourseModal" tabindex="-1" role="dialog" aria-labelledby="buyCourseModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="buyCourseModalLabel">Buy Course</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="courseNameInput">Course Name</label>
+                            <input type="text" class="form-control" id="courseNameInput" readonly>
+                            <!-- Input field for course name -->
+                        </div>
+                        <div class="form-group">
+                            <label for="courseDuration">Duration</label>
+                            <select class="form-control" id="courseDuration">
+                                <option value="1">3 months</option>
+                                <option value="2">6 months</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="courseAmount">Amount ($)</label>
+                            <input type="text" class="form-control" id="amountInput" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="buynow">Buy Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Course Type Modal -->
+    <div class="modal fade" id="courseTypeModal" tabindex="-1" role="dialog" aria-labelledby="courseTypeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="courseTypeModalLabel">Select Course Type</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-info btn-block selectCourseType" data-type="document">Document</button>
+                    <button class="btn btn-warning btn-block selectCourseType" data-type="video">Video</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+        var userEmail = "", selectedType = "";
+        const coursesData = [
+            {
+                name: "JAVA",
+                duration1: "3 months",
+                amount1: "4000",
+                duration2: "6 months",
+                amount2: "5000",
+                type: "document",
+                titleColor: "text-primary",
+                image: "images/java.webp",
+                description: "Dive deep into the world of Java and explore the intricacies of object-oriented programming..."
+            },
+            {
+                name: "JAVASCRIPT",
+                duration1: "3 months",
+                amount1: "6000",
+                duration2: "6 months",
+                amount2: "11000",
+                type: "video",
+                titleColor: "text-warning",
+                image: "images/js.jpg",
+                description: "Dive deep into JavaScript and discover its vast ecosystem...Dive deep into JavaScript and discover its vast ecosystem...Dive deep into JavaScript and discover its vast ecosystem..."
+            },
+            // Add other courses similarly...
+        ];
+
+
+        $(document).ready(function () {
+
+            userEmail = sessionStorage.getItem('userEmail');
+
+            if (!userEmail) {
+                window.location.href = './index.html'; // Redirect if no session email
+            } else {
+                // Validate the user's session by checking with the backend
+                $.ajax({
+                    url: 'http://localhost:8080/validateUser',
+                    method: 'POST',
+                    data: JSON.stringify({ email: userEmail }),
+                    contentType: "application/json",
+                    success: function (response) {
+                        // If successful, the user is valid, proceed to load the dashboard
+                        loadDashboard();
+                    },
+                    error: function (error) {
+                        console.log("Validation failed:", error);
+                        sessionStorage.clear();
+
+                    }
+                });
+            }
+        });
+
+        function loadDashboard() {
+            // Check if the user is logged in
+            if (sessionStorage.getItem('loggedIn') !== 'true') {
+                window.location.href = './index.html';
+            }
+
+            // Hide all courses initially
+            $(".course").hide();
+
+            // Fetch the user's enrolled courses and display them
+            fetchEnrolledCourses();
+
+            // Check for expired courses and refresh the list afterwards
+            checkForExpiredCourses();
+
+            // Event listeners
+            $("#logoutButton").on("click", logout);
+            // $(".continueReading").click(handleCourseSelection);
+            $("#enrolledCourseContainer").on("click", ".continueReading", handleCourseSelection);
+
+            $("#courseDuration").change(updateCoursePrice);
+            $(".showMoreCourses").click(showAllCourses);
+            $("#buynow").click(addCourse);
+            $("#searchBox").on('input', searchCourses);
+            $(".showMoreCourses").click(function (e) {
+                e.preventDefault();
+                $("#courseTypeModal").modal('show');
+            });
+
+            $(".navbar .showMoreCourses").click(showAllCourses);  // Attach to the navbar button
+            $(".container .showMoreCourses").click(showCourseTypeModal); // Different behavior for the container button
+
+
+
+        }
+
+        function showCourseTypeModal(e) {
+            e.preventDefault();
+            $("#courseTypeModal").modal('show');
+        }
+
+        function generateCourseHTML(course) {
+            let courseHtml = `
+    <div class="row">
+        <div class="course ${course.name}" data-duration1="${course.duration1}" data-amount1="${course.amount1}" data-duration2="${course.duration2}"
+            data-amount2="${course.amount2}" data-name="${course.name}" data-type="${course.type}">
+            <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 ${course.titleColor}">${course.name}</strong>
+                    <h3 class="mb-0">Learn ${course.name}</h3>
+                    <div class="mb-1 text-muted">Nov 12</div>
+                    <p class="card-text mb-auto">${course.description}</p>
+                    <a href="#" class="stretched-link continueReading">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img class="bd-placeholder-img" width="200" height="250" src="${course.image}" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>`;
+
+            return courseHtml;
+        }
+
+
+        // function fetchEnrolledCourses() {
+        //     $.ajax({
+        //         url: 'http://localhost:8080/getUserCourses',
+        //         method: 'GET',
+        //         data: { email: userEmail },
+        //         success: displayEnrolledCourses,
+        //         error: function (error) {
+        //             console.error("Error fetching enrolled courses:", error);
+        //         }
+        //     });
+        // }
+
+        function fetchEnrolledCourses() {
+            console.log("Fetching enrolled courses..."); // Debug log
+            $.ajax({
+                url: 'http://localhost:8080/getUserCourses',
+                method: 'GET',
+                data: { email: userEmail },
+                success: function (courses) {
+                    console.log("Fetched courses: ", courses); // Debug log
+                    displayEnrolledCourses(courses);
+                },
+                error: function (error) {
+                    console.error("Error fetching enrolled courses:", error);
+                }
+            });
+        }
+
+
+        function displayEnrolledCourses(courses) {
+            $("#enrolledCourseContainer").show();
+            // After displaying enrolled courses:
+            $(".showMoreCourses").show();
+
+            const currentDate = new Date();
+            console.log(courses);
+            if (courses && courses.length > 0) {
+                sessionStorage.setItem('enrolledCourses', JSON.stringify(courses.map(courseData => courseData.courseName)));
+                courses.forEach(course => {
+                    const courseNameUpperCase = course.courseName.toUpperCase();
+                    console.log(courseNameUpperCase)
+                    const endDate = new Date(course.purchaseDate);
+
+                    if (!isNaN(endDate.getTime())) {
+
+                        if (course.duration == 3) {
+                            endDate.setMonth(endDate.getMonth() + 3);
+                        } else if (course.duration == 6) {
+                            endDate.setMonth(endDate.getMonth() + 6);
+                        }
+                        // more durations can be added as necessary
+
+                        const remainingDays = Math.ceil((endDate - currentDate) / (1000 * 60 * 60 * 24));
+
+                        const courseElement = $(`.course.${courseNameUpperCase}`);
+
+                        courseElement.show();
+                        console.log("Appending days left for", courseNameUpperCase);
+                        courseElement.find('strong').after(`<span class="remaining-days"> ${remainingDays} days left</span>`);
+
+                        // courseElement.find('strong.d-inline-block.mb-2').after(`<span class="remaining-days" style="background-color: yellow; color: black;"> ${remainingDays} days left</span>`);
+                    } else {
+                        console.warn("Missing purchaseDate for course:", course);
+                    }
+
+                });
+                $("#messageContainer").empty();
+            } else {
+                $("#messageContainer").html(`
+                <div class="alert alert-warning">
+                    No courses are purchased.
+                </div>
+                <button id="buyNewCourse" class="btn btn-success">Buy Now</button>
+            `);
+
+                // $("#buyNewCourse").click(function () {
+                //     $(".course").show();
+                //     $("#messageContainer").empty();
+                // });
+                // $(".showMoreCourses").hide();
+
+
+
+                // When "Buy Now" is clicked
+                $("#buyNewCourse").click(function () {
+                    $("#courseTypeModal").modal('show');
+                    $("#messageContainer").empty();
+
+                });
+
+                $(".showMoreCourses").hide();
+
+                // $(".selectCourseType").click(function () {
+                //     const selectedType = $(this).data("type"); // get the type of course the user selected
+
+                //     $("#courseTypeModal").modal('hide');
+
+                //     $(".course").hide(); // Hide all courses
+
+                //     // Show only courses of the selected type
+                //     $(`.course[data-type=${selectedType}]`).show();
+                // });
+
+
+                // $(".selectCourseType").click(function () {
+                //     selectedType = $(this).data("type");
+
+                //     $("#courseTypeModal").modal('hide');
+
+                //     // Clear current courses displayed
+                //     $("#enrolledCourseContainer").empty();
+                //     console.log("All courses:", coursesData);
+                //     // Filter the courses based on selected type and generate HTML
+                //     coursesData.filter(course => course.type === selectedType).forEach(course => {
+                //         $("#enrolledCourseContainer").append(generateCourseHTML(course));
+                //         console.log(selectedType)
+                //     });
+                // });
+
+                // $(".selectCourseType").click(function () {
+                //     selectedType = $(this).data("type");
+                //     $("#courseTypeModal").modal('hide');
+
+                //     // Clear current courses displayed
+                //     $("#enrolledCourseContainer").empty();
+
+                //     // Get a list of currently enrolled courses
+                //     const enrolledCourses = JSON.parse(sessionStorage.getItem('enrolledCourses') || "[]");
+
+                //     // Filter the courses based on selected type and generate HTML
+                //     coursesData.filter(course => course.type === selectedType).forEach(course => {
+                //         const isEnrolled = enrolledCourses.includes(course.name.toUpperCase());
+                //         $("#enrolledCourseContainer").append(generateCourseHTML(course, isEnrolled));
+                //     });
+                // });
+
+
+                $(".selectCourseType").click(function () {
+                    selectedType = $(this).data("type");
+                    $("#courseTypeModal").modal('hide');
+
+                    // Clear current courses displayed
+                    $("#enrolledCourseContainer").empty();
+
+                    const enrolledCourses = JSON.parse(sessionStorage.getItem('enrolledCourses') || "[]");
+
+                    // Filter the courses based on the selected type and generate HTML
+                    coursesData.filter(course => course.type === selectedType).forEach(course => {
+                        const isEnrolled = enrolledCourses.includes(course.name.toUpperCase());
+                        let courseHtml = generateCourseHTML(course);
+                        if (isEnrolled) {
+                            courseHtml += '<div class="overlay"></div><div class="enrolled-text">Already Bought</div>';
+                        }
+                        $("#enrolledCourseContainer").append(courseHtml);
+                    });
+                });
+
+
+
+            }
+        }
+
+        function checkForExpiredCourses() {
+            $.ajax({
+                url: 'http://localhost:8080/check-expired-courses',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    email: userEmail
+                }),
+                success: fetchEnrolledCourses
+            });
+        }
+
+        function handleCourseSelection(e) {
+            e.preventDefault();
+            let parentCourse = $(this).closest(".course");
+            selectedCourse = parentCourse.attr('class').split(' ')[1];
+            let courseName = parentCourse.data('name');
+            $('#courseNameInput').val(courseName);
+            updateCoursePrice();
+            const enrolledCourses = JSON.parse(sessionStorage.getItem('enrolledCourses') || "[]");
+
+            if (enrolledCourses.some(course => course === selectedCourse)) {
+                let courseUrl;
+                switch (selectedCourse) {
+                    case "JAVA":
+                        courseUrl = "https://docs.oracle.com/javase/tutorial/";
+                        break;
+                    case "JAVASCRIPT":
+                        courseUrl = "https://developer.mozilla.org/en-US/docs/Web/JavaScript";
+                        break;
+                    case "BOOTSTRAP":
+                        courseUrl = "https://getbootstrap.com/docs/4.4/getting-started/introduction/";
+                        break;
+                    case "PYTHON":
+                        courseUrl = "https://docs.python.org/3/";
+                        break;
+                    case "REACTJS":
+                        courseUrl = "https://reactjs.org/docs/getting-started.html";
+                        break;
+                    case "NODEJS":
+                        courseUrl = "https://nodejs.org/en/docs/";
+                        break;
+                    case "DEVOPS":
+                        courseUrl = "https://www.atlassian.com/devops";
+                        break;
+                    case "DESIGNING":
+                        courseUrl = "https://www.w3.org/standards/webdesign/";
+                        break;
+                    case "AWS":
+                        courseUrl = "https://aws.amazon.com/documentation/";
+                        break;
+                    case "AZURE":
+                        courseUrl = "https://docs.microsoft.com/en-us/azure/?product=featured";
+                        break;
+                    case "PHP":
+                        courseUrl = "https://www.php.net/manual/en/";
+                        break;
+                    case "MYSQL":
+                        courseUrl = "https://dev.mysql.com/doc/";
+                        break;
+
+                    default:
+                        courseUrl = "#";  // Default link, can be set to saomething meaningful.
+                }
+                window.location.href = courseUrl;
+            } else {
+                $('#buyCourseModal').modal('show');
+            }
+        }
+
+        function updateCoursePrice() {
+            let duration = $("#courseDuration").val();
+            let courseClass = $('#courseNameInput').val().toUpperCase();
+            let parentCourse = $('.course.' + courseClass);
+            let amount = parentCourse.data('amount' + duration);
+            $('#amountInput').val(amount);
+        }
+
+        function showAllCourses(e) {
+            e.preventDefault();
+            $(".course").show();
+            // $(this).hide();
+
+
+
+            // const enrolledCourses = JSON.parse(sessionStorage.getItem('enrolledCourses') || "[]");
+            // enrolledCourses.forEach(course => {
+            //     const courseElement = $(`.course.${course}`);
+            //     courseElement.addClass('enrolled-course');
+            //     courseElement.append('<div class="overlay"></div><div class="enrolled-text">Already Bought</div>');
+            // });
+        }
+
+        function addCourse() {
+            const selectedCourseName = $('#courseNameInput').val();
+            let selectedDuration = $('#courseDuration').val();
+            const selectedAmount = $('#amountInput').val();
+            if (selectedDuration == 1) selectedDuration = 3;
+            else if (selectedDuration == 2) selectedDuration = 6;
+
+            $.ajax({
+                url: 'http://localhost:8080/addCourse',
+                type: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: JSON.stringify({
+                    email: userEmail,
+                    courseName: selectedCourseName,
+                    duration: selectedDuration,
+                    courseType: selectedType,
+                    amount: parseFloat(selectedAmount)
+                }),
+                success: function (response) {
+                    alert("Course added successfully!");
+                    $('#buyCourseModal').modal('hide');
+                    // location.reload();
+                    fetchEnrolledCourses(); // Refresh enrolled courses after a new purchase
+                    $(".showMoreCourses").show();
+                },
+                error: function (error) {
+                    console.error("Error adding course:", error);
+                }
+            });
+        }
+
+        function searchCourses() {
+            const searchTerm = $(this).val().toLowerCase();
+            let found = false;
+
+            $(".course").each(function () {
+                const courseName = $(this).find("strong").text().toLowerCase();
+                if (courseName.includes(searchTerm)) {
+                    $(this).parent().show();
+                    found = true;
+                } else {
+                    $(this).parent().hide();
+                }
+            });
+
+            if (found) {
+                $("#notFoundMessage").hide();
+            } else {
+                $("#notFoundMessage").show();
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem('userEmail');
+            sessionStorage.removeItem('enrolledCourses');
+            sessionStorage.removeItem('loggedIn');
+            window.location.href = "./index.html";
+        }
+
+    </script>
+
+</body>
+
+</html>

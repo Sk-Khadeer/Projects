@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>welcome</title>
+
+<style>
+body {
+	font-family: sans-serif;
+	background: -webkit-linear-gradient(to right, #155799, #159957);
+	background: linear-gradient(to right, #155799, #159957);
+	color: whitesmoke;
+}
+
+form {
+	width: 35rem;
+	margin: auto;
+	color: whitesmoke;
+	backdrop-filter: blur(16px) saturate(180%);
+	-webkit-backdrop-filter: blur(16px) saturate(180%);
+	background-color: rgba(11, 15, 13, 0.582);
+	border-radius: 12px;
+	border: 1px solid rgba(255, 255, 255, 0.125);
+	padding: 20px 25px;
+}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+	crossorigin="anonymous">
+
+</head>
+
+<body>
+
+<form action="#" th:action="${register1}" method="post">
+	<div align="center">
+		<label for="firstname">First name :</label> <input type="text" /> <br />
+		<label for="lastname">Last name :</label> <input type="text" /> <br />
+
+		<label for="email">Email :</label> <input type="email" /> <br /> <label
+			for="password">Password :</label> <input type="password" /> <br />
+		<label for="age">Age :</label> <input type="number" /> <br /> <label
+			for="location">Location :</label> <input type="text" /> <br /> <label
+			for="gender">Gender :</label> <input type="radio" value="Male" />Male
+		<input type="radio" value="Female" />Female<br />
+
+
+
+		<script type="text/javascript">
+			 function map() {
+					if ('geolocation' in navigator) {
+						navigator.geolocation.getCurrentPosition(position => {
+							document.write("latitude ::  " + position.coords.latitude);
+							document.write("<br>longitude ::  " + position.coords.longitude);
+						})
+					} else {
+						console.log("geolocation not avaliable");
+					}
+				}
+		</script>
+		<button onclick="map()">location</button>
+	</div>
+</form>
+
+</body>
+</html>

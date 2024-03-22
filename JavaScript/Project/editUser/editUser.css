@@ -1,0 +1,157 @@
+.card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+  }
+  .card-registration .select-arrow {
+    top: 13px;
+  }
+  .error-message {
+    color: red;
+    font-size: 12px; /* Adjust as needed */
+  }
+  .field-icon {
+    position: absolute;
+    right: 20px;
+    top: 70%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  #subDesignationLabel,
+  #subDesignation {
+    display: none;
+  }
+  body {
+    background-color: lightgray;
+  }
+  
+  .iconStyle {
+    font-size: 18px;
+    border: 2px solid;
+    border-radius: 50%;
+    padding: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .iconStyle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .profile-text {
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  
+  #right-sidebar {
+    background-color: burlywood;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    transition: right 0.3s;
+    overflow-x: hidden;
+    z-index: 1000;
+    margin-top: 56px;
+  }
+  .email-field {
+    pointer-events: none; /* This prevents any interaction with the email span element */
+    opacity: 0.6; /* This will make the email look slightly faded to indicate it's non-editable */
+  }
+  #user-details {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+  
+  #subDesignation {
+    display: block !important;
+    visibility: visible !important;
+    max-height: none !important;
+  }
+  /* Add this to your CSS file or in a <style> tag in your HTML head */
+  #applyLeaveBtn:disabled {
+    background-color: #FFA500; /* This is the color for 'orange'. Adjust to your preference. */
+    border-color: #FFA500; /* If you have borders, make sure to set the color here too. */
+    cursor: not-allowed; /* This will show a 'no entry' cursor when hovering over the button. */
+  }
+  #sidebar {
+    background-color: burlywood;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    transition: left 0.3s;
+    margin-top: 56px;
+  }
+  
+  .menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    margin-right: 15px;
+  }
+  
+  .menu-btn span {
+    width: 30px;
+    height: 2px;
+    background-color: #fff;
+    display: block;
+    margin: 5px 0;
+  }body.sidebar-open #sidebar {
+    left: 0;
+  }
+  
+  .iconStyle {
+    font-size: 18px;
+    border: 2px solid;
+    border-radius: 50%;
+    padding: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .iconStyle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .profile-text {
+    text-decoration: none;
+    margin-right: 10px;
+  }
+  #right-sidebar {
+    background-color: burlywood;
+    width: 250px;
+    /* explicitly set this */
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -250px;
+    /* start from a closed state */
+    transition: right 0.3s;
+    overflow-x: hidden;
+    z-index: 1000;
+    margin-top: 56px;
+  }
+  
+  #main-content .form-control,
+  #main-content .btn {
+    width: auto;
+    /* This allows the width to adjust according to content */
+    max-width: 200px;
+    /* Set a maximum width */
+  }
+  
+  
+  @media (min-width: 768px) {
+    body.sidebar-open #main-content {
+      margin-left: 250px;
+      transition: margin-left 0.3s;
+    }
+  }
+  #leave-form {
+      display: none;
+  }
+  
+  

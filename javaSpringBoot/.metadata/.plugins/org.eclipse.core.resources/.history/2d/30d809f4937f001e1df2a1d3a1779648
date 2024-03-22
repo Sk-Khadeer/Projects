@@ -1,0 +1,12 @@
+public class GeneratedEntity {
+    private String exampleField;
+
+    public GeneratedEntity(String exampleField) {
+        this.exampleField = exampleField;
+    }
+
+    public void printExample() {
+        System.out.println(exampleField);
+    }
+}
+
